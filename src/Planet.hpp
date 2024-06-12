@@ -1,3 +1,11 @@
+/**
+ *
+ * hpp files are header files that contain declarations of classes, functions, and variables.
+ * hpp file serve a similar role to interfaces in other languages. hpp files typically contain function prototypes, class definitions, constants, and other references which provide a "contract" that the corresponding implementation file (.cpp) must follow
+ *
+ *
+ * */
+
 #ifndef PLANET_HPP // Processor directive to avoid multiple inclusion(if not defined). Used with #endif
 #define PLANET_HPP // Processor directive to define a macro which is a name that represents a piece of code or value. Once macro is defined, the compiler will replace all instances of the macro in the code wih its defined value or code before the actual compilation process begins.
 
