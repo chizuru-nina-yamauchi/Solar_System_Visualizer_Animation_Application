@@ -1,0 +1,2 @@
+/home/dci-student/CLionProjects/Solar_System_Visualizer_Application/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/dci-student/CLionProjects/Solar_System_Visualizer_Application/cmake-build-debug/CMakeFiles/rebuild_cache.dir
