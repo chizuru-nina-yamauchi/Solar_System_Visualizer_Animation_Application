@@ -1,4 +1,11 @@
-// Actual implementation of the Planet class
+/**
+ * Purpose: Implement the methods of the Planet class that are declared in the Planet.hpp header file.
+ *  It defines how the planet's position is updated based on its orbit and rotation, and how it is drawn on the screen using SFML.
+ *  The setter methods allow customization of the planet's properties.
+ *
+ *
+ * */
+
 
 #include "Planet.hpp" // Include the header file for the Planet class
 
@@ -23,7 +30,7 @@ Planet::Planet(float radius, float distance, float orbitSpeed, float rotationSpe
 }
 
 /**
- * The purpose of this function is to update the state of a Planet object based on the elapsed time.
+ * This function updates the state of a Planet object based on the elapsed time.
  * If the planet is orbiting another planet (i.e., orbitingPlanet is not nullptr), it calculates the new position of the planet in its orbit around the orbitingPlanet.
  * This is done by incrementing the current angle of the planet's orbit (currentAngle) based on the planet's orbit speed (orbitSpeed) and the elapsed time (deltaTime),
  * and then calculating the new x and y coordinates of the planet's position.
@@ -70,6 +77,7 @@ void Planet::draw(sf::RenderWindow& window) {
 
 
 // Setters for various properties of the Planet class
+
 /**
  * The purpose of this function is to set the planet as orbiting around another planet.
  * It takes a pointer to a Planet object as a parameter and sets the orbitingPlanet member variable to point to the specified planet.
@@ -78,6 +86,50 @@ void Planet::draw(sf::RenderWindow& window) {
  * */
 void Planet::setOrbiting(Planet* planet) {
     orbitingPlanet = planet; // Sets the orbitingPlanet member variable to point to the specified planet. This establishes the relationship where the current planet orbits around the specified planet.
+}
+
+void Planet::setRotation(float speed) {
+    rotationSpeed = speed; // Sets the rotation speed of the planet to the specified speed. This determines how fast the planet rotates around its own axis.
+}
+
+void Planet::setOrbitSpeed(float speed) {
+    orbitSpeed = speed; // Sets the orbit speed of the planet to the specified speed. This determines how fast the planet orbits around another planet or point.
+}
+
+void Planet::setDistance(float distance) {
+    this->distance = distance; // Sets the distance of the planet from the planet it's orbiting around to the specified distance. This determines how far the planet is from the center of the orbit.
+}
+
+void Planet::setRadius(float radius) {
+    this->radius = radius; // Sets the radius of the planet to the specified radius. This determines the size of the planet.
+    shape.setRadius(radius); // Updates the radius of the circle shape to match the new radius of the planet: update for visual representation with sfml
+    shape.setOrigin(radius, radius); // Updates the origin of the circle shape to the center of the shape based on the new radius: update for visual representation with sfml
+}
+
+void Planet::setColor(sf::Color color) {
+    this->color = color; // Sets the color of the planet to the specified color. This determines the visual appearance of the planet.
+    shape.setFillColor(color); // Updates the fill color of the circle shape to match the new color of the planet: update for visual representation with sfml
+}
+
+void Planet::setPosition(sf::Vector2f position) {
+    this->position = position; // Sets the position of the planet to the specified position. This determines the location of the planet on the screen.
+    shape.setPosition(position); // Updates the position of the circle shape to match the new position of the planet: update for visual representation with sfml
+}
+
+void Planet::setTexture(const std::string& texturePath) { // const: In this context, const means the function promises not to modify the texturePath argument that it receives.
+    // const and &: it means that the function promises not to modify the original data. This allows the function to be called with both modifiable and non-modifiable strings.
+    if (texture.loadFromFile(texturePath)) { // Loads the texture from the specified file path. If the texture is loaded successfully, the function returns true.
+        shape.setTexture(&texture); // Sets the texture of the circle shape to the loaded texture. This applies the texture to the visual representation of the planet.
+    }
+
+}
+
+void Planet::setOrigin(sf::Vector2f origin) {
+    shape.setOrigin(origin); // Sets the origin of the circle shape to the specified origin. This determines the point around which the shape rotates and scales.
+}
+
+void Planet::setRotation(float angle) {
+    shape.setRotation(angle); // Sets the rotation of the circle shape to match the specified angle. This visually rotates the planet to the specified angle.
 }
 
 
