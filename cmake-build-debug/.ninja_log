@@ -1,0 +1,5 @@
+# ninja log v6
+0	542	1718624745395018606	CMakeFiles/SolarSystemSimulation.dir/src/Planet.cpp.o	5aec8a8a568ab314
+0	739	1718624745395018606	CMakeFiles/SolarSystemSimulation.dir/src/main.cpp.o	b5769750d3041cd3
+1	732	1718625182098493562	CMakeFiles/SolarSystemSimulation.dir/src/Database.cpp.o	ea030a0f324a3d35
+732	866	1718625182830492839	SolarSystemSimulation	9e088ce5de9f63a

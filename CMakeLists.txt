@@ -17,7 +17,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(PQXX REQUIRED libpqxx)
 
 # Add executable
-add_executable(SolarSystemSimulation main.cpp Planet.cpp Database.cpp)
+add_executable(SolarSystemSimulation src/main.cpp src/Planet.cpp src/Database.cpp)
 
 # Link SFML and libpqxx libraries
 target_link_libraries(SolarSystemSimulation sfml-graphics sfml-window sfml-system ${PQXX_LIBRARIES})

@@ -30,13 +30,17 @@ public:
 
     //Setters
     void setOrbiting(Planet* planet); // Function to set the planet as orbiting around another planet : Planet* is a pointer to a Planet object#
-    void setRotation(float speed);
+    void setRotationSpeed(float speed); // Renamed setRotation to setRotationSpeed to avoid confusion with the setRotation function that sets the rotation angle
     void setOrbitSpeed(float speed);
     void setDistance(float distance);
     void setRadius(float radius);
     void setColor(sf::Color color);
     void setPosition(sf::Vector2f position);
-    void setTexture(std::string& texturePath);
+    /*
+     * The const keyword in const std::string& texturePath is used to indicate that the function setTexture will not modify the texturePath argument.
+     * This is a promise to the compiler that the function will not change the value of texturePath
+     * */
+    void setTexture(const std::string& texturePath);  // Use const std::string& texturePath to pass the texture path as a constant reference to avoid copying the string
     void setOrigin(sf::Vector2f origin);
     void setRotation(float angle);
 

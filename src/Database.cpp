@@ -5,15 +5,15 @@
 Database::Database(const std::string& connectionString){ // This constructor takes a single parameter, const std::string& connectionString, which is a string containing the connection details for the PostgreSQL database.
     try{
         // Try to create a new database connection using the provided connection string
-        db = new pqxx::connection(connectionString){ // pqxx is like jdbc in Java, both are APIs that allow to interact with database, but pqxx is only for PostgreSQL
+        db = new pqxx::connection(connectionString); // pqxx is like jdbc in Java, both are APIs that allow to interact with database, but pqxx is only for PostgreSQL
             if(!db->is_open()){
                std::cerr << "Can't open database" << std::endl;
             }
         } catch (const std::exception &e){ // for example, if the connection string is invalid or the database server is not running.
             std::cerr << e.what() << std::endl; // output the error message to the standard error stream.
         }
-    }
 }
+
 
 // Destructor to close the database connection
 Database::~Database(){
@@ -41,6 +41,7 @@ std::vector<Planet> Database::loadPlanets(){
             float position_X = row["position_x"].as<float>();
             float position_Y = row["position_y"].as<float>();
 
+            sf::Vector2f position(position_X, position_Y); // Create a 2D vector representing the position of the planet
             planets.emplace_back(radius, distance, orbitSpeed, rotationSpeed, sf::Color(color), sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
         }
         W.commit(); // Commit the transaction

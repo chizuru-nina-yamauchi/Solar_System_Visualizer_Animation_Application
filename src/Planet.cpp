@@ -7,6 +7,8 @@
  * */
 
 
+#include <cmath>
+#include <iostream>
 #include "Planet.hpp" // Include the header file for the Planet class
 
 
@@ -45,10 +47,13 @@ void Planet::update(float deltaTime) {
         float angleIncrement = orbitSpeed * deltaTime;
         currentAngle += angleIncrement;
 
-        float x = orbitingPlanet->position.x + distance * cos(currentAngle);
-        float y = orbitingPlanet->position.y + distance * sin(currentAngle);
-
-        position = sf::Vector2f(x, y);
+        if (orbitingPlanet) {
+            float x = orbitingPlanet->position.x + distance * cos(currentAngle);
+            float y = orbitingPlanet->position.y + distance * sin(currentAngle);
+            shape.setPosition(x, y);
+        } else {
+            shape.setPosition(distance*cos(currentAngle), distance*sin(currentAngle));
+        }
     }
 
     /**
@@ -61,6 +66,11 @@ void Planet::update(float deltaTime) {
     currentRotation += rotationIncrement; // Updates the current rotation angle of the planet by adding the rotation increment. This means the planet's rotation is increased by an amount that ensures it rotates at the correct speed, regardless of the frame rate.
     shape.setRotation(currentRotation); // applies the updated rotation to the shape object, which is a sf::CircleShape that visually represents the planet. The setRotation function sets the rotation of the shape in degrees.
     shape.setPosition(position);  // sets the position of the shape object to the current position of the Planet object. The setPosition function takes a sf::Vector2f object that represents the new position of the shape.
+
+    // Debug print statements
+    std::cout << "Planet position: (" << shape.getPosition().x << ", " << shape.getPosition().y << ")" << std::endl;
+    std::cout << "Planet rotation: " << shape.getRotation() << std::endl;
+
 }
 
 /**
@@ -71,6 +81,9 @@ void Planet::update(float deltaTime) {
  * */
 
 void Planet::draw(sf::RenderWindow& window) {
+    // Debug print statement
+    std::cout << "Drawing planet at position: (" << shape.getPosition().x << ", " << shape.getPosition().y << ")" << std::endl;
+
     window.draw(shape); // Draws the circle shape on the specified window. The draw function is used to render the shape on the window.
 }
 
@@ -88,7 +101,7 @@ void Planet::setOrbiting(Planet* planet) {
     orbitingPlanet = planet; // Sets the orbitingPlanet member variable to point to the specified planet. This establishes the relationship where the current planet orbits around the specified planet.
 }
 
-void Planet::setRotation(float speed) {
+void Planet::setRotationSpeed(float speed) {
     rotationSpeed = speed; // Sets the rotation speed of the planet to the specified speed. This determines how fast the planet rotates around its own axis.
 }
 

@@ -12,7 +12,11 @@
 						"string" : "3.10"
 					},
 					"projectIndex" : 0,
-					"source" : "."
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
 			"name" : "Debug",
@@ -23,10 +27,23 @@
 					[
 						0
 					],
-					"name" : "SolarSystemSimulation"
+					"name" : "SolarSystemSimulation",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
-			"targets" : []
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SolarSystemSimulation::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SolarSystemSimulation-Debug-9c07a3ebb1b5091db513.json",
+					"name" : "SolarSystemSimulation",
+					"projectIndex" : 0
+				}
+			]
 		}
 	],
 	"kind" : "codemodel",
