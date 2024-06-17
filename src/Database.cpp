@@ -52,7 +52,7 @@ std::vector<Planet> Database::loadPlanets(){
 
             sf::Vector2f position(position_X, position_Y); // Create a 2D vector representing the position of the planet
 
-            planets.emplace_back(radius * 10.0f, distance * 10.0f, orbitSpeed, rotationSpeed, color, sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
+            planets.emplace_back(radius, distance, orbitSpeed, rotationSpeed, color, sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
         }
         W.commit(); // Commit the transaction
     } catch (const std::exception &e) { // Catch any exceptions that occur during the database operation
