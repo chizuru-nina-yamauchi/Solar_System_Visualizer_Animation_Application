@@ -46,15 +46,13 @@ void Planet::update(float deltaTime) {
         // The position of the planet is then updated with these new coordinates.
         float angleIncrement = orbitSpeed * deltaTime;
         currentAngle += angleIncrement;
-
-        if (orbitingPlanet) {
             float x = orbitingPlanet->position.x + distance * cos(currentAngle);
             float y = orbitingPlanet->position.y + distance * sin(currentAngle);
             shape.setPosition(x, y);
         } else {
             shape.setPosition(distance*cos(currentAngle), distance*sin(currentAngle));
         }
-    }
+
 
     /**
      * this code ensures that the planet rotates and moves correctly based on the elapsed time, which makes the movement smooth and consistent,

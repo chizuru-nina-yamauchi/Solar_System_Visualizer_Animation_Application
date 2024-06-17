@@ -1,6 +1,13 @@
 #include "Database.hpp"
 #include <iostream>
 
+sf::Color intToColor(int color) {
+    int r = (color >> 16) & 0xFF;
+    int g = (color >> 8) & 0xFF;
+    int b = color & 0xFF;
+    return sf::Color(r, g, b);
+}
+
 // Constructor to initialize(represent) the database connection and provide functionality to load planets from the database.
 Database::Database(const std::string& connectionString){ // This constructor takes a single parameter, const std::string& connectionString, which is a string containing the connection details for the PostgreSQL database.
     try{
@@ -37,12 +44,15 @@ std::vector<Planet> Database::loadPlanets(){
             float distance = row["distance"].as<float>();
             float orbitSpeed = row["orbit_speed"].as<float>();
             float rotationSpeed = row["rotation_speed"].as<float>();
-            int color = row["color"].as<int>();
+            int colorInt = row["color"].as<int>();
+            sf::Color color = intToColor(colorInt);
+
             float position_X = row["position_x"].as<float>();
             float position_Y = row["position_y"].as<float>();
 
             sf::Vector2f position(position_X, position_Y); // Create a 2D vector representing the position of the planet
-            planets.emplace_back(radius, distance, orbitSpeed, rotationSpeed, sf::Color(color), sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
+
+            planets.emplace_back(radius * 10.0f, distance * 10.0f, orbitSpeed, rotationSpeed, color, sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
         }
         W.commit(); // Commit the transaction
     } catch (const std::exception &e) { // Catch any exceptions that occur during the database operation
