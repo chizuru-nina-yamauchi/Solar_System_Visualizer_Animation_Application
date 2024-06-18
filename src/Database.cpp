@@ -1,6 +1,11 @@
 #include "Database.hpp"
 #include <iostream>
+#define _USE_MATH_DEFINES
+#include <cmath>
 
+
+
+// Function to convert an integer color value to an SFML color
 sf::Color intToColor(int color) {
     int r = (color >> 16) & 0xFF;
     int g = (color >> 8) & 0xFF;
@@ -36,14 +41,16 @@ std::vector<Planet> Database::loadPlanets(){
         std::string query = "SELECT name, radius, distance, orbit_speed, rotation_speed, color, position_x, position_y FROM planets"; // SQL query to select all planets from the database
         pqxx::result R = W.exec(query); // Execute the query and store the result in R
 
+        float timeFactor = 2 * M_PI / 5.0f; // Factor to control the speed of the simulation
+
         // Iterate over the result set and create a Planet object for each row
         for(auto row : R){
             // Extract the values from the row
             std::string name = row["name"].c_str();
             float radius = row["radius"].as<float>();
             float distance = row["distance"].as<float>();
-            float orbitSpeed = row["orbit_speed"].as<float>();
-            float rotationSpeed = row["rotation_speed"].as<float>();
+            float orbitSpeed = row["orbit_speed"].as<float>() * timeFactor; // Multiply the orbit speed by the time factor
+            float rotationSpeed = row["rotation_speed"].as<float>() * timeFactor; // Multiply the rotation speed by the time factor
             int colorInt = row["color"].as<int>();
             sf::Color color = intToColor(colorInt);
 
@@ -52,7 +59,7 @@ std::vector<Planet> Database::loadPlanets(){
 
             sf::Vector2f position(position_X, position_Y); // Create a 2D vector representing the position of the planet
 
-            planets.emplace_back(radius, distance, orbitSpeed, rotationSpeed, color, sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
+            planets.emplace_back(name, radius, distance, orbitSpeed, rotationSpeed, color, sf::Vector2f(position_X, position_Y)); // Create a new Planet object and add it to the vector of planets
         }
         W.commit(); // Commit the transaction
     } catch (const std::exception &e) { // Catch any exceptions that occur during the database operation

@@ -7,7 +7,7 @@
 
 int main() {
     // Create a window with a resolution of 800x600 pixels
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Solar System Simulation");
+    sf::RenderWindow window(sf::VideoMode(1600, 1200), "Solar System Simulation");
 
     // Retrieve the connection string from an environment variable
     const char* db_conn = std::getenv("DB_CONNECTION_STRING");

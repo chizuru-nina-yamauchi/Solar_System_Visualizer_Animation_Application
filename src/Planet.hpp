@@ -22,7 +22,7 @@
 
 class Planet {
 public:
-    Planet(float radius, float distance, float orbitSpeed, float rotationSpeed, sf::Color color, sf::Vector2f position); // sf:: is a namespace that contains all the classes and functions provided by SFML library
+    Planet(std::string, float radius, float distance, float orbitSpeed, float rotationSpeed, sf::Color color, sf::Vector2f position); // sf:: is a namespace that contains all the classes and functions provided by SFML library
 
     // deltaTime represents the time elapsed between two frames. In other words, it's the time it took to complete the last frame. This is used to make movement and other time-based actions smooth and consistent, regardless of the frame rate.
     void update(float deltaTime); // Function to update the planet's position based on time
