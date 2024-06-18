@@ -141,6 +141,20 @@ INSERT INTO planets (name, radius, distance, orbit_speed, rotation_speed, color,
 
 ![pic2](./pics/pic2.png)
 
+## Deubgging the issue updating the position of the planets, orbiting around the sun function
+After solving the issue of the size of the planets, the distance, and especially the updating the position of the planets(orbiting around the sun function), the final result is as follows:
+
+![pic3](./pics/pic3.png)
+
+![pic4](./pics/pic4.png)
+
+![pic5](./pics/pic5.png)
+
+** On the console, we can see the data of the planets, such as name, orbit speed, rotation speed, position x, and position y. **
+
+![pic6](./pics/pic6.png)
+
+![pic7](./pics/pic7.png)
 
 
 

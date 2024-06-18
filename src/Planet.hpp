@@ -22,14 +22,18 @@
 
 class Planet {
 public:
+    // Constructor to initialize the planet's properties
     Planet(std::string, float radius, float distance, float orbitSpeed, float rotationSpeed, sf::Color color, sf::Vector2f position); // sf:: is a namespace that contains all the classes and functions provided by SFML library
 
     // deltaTime represents the time elapsed between two frames. In other words, it's the time it took to complete the last frame. This is used to make movement and other time-based actions smooth and consistent, regardless of the frame rate.
     void update(float deltaTime); // Function to update the planet's position based on time
     void draw(sf::RenderWindow& window); // Function to draw the planet on the window(sf::RenderWindow is a class that represents the window where graphics are rendered by SFML)
 
+    // Getters
+    float getDistance() const { return distance; } // Function to get the distance of the planet from the center of the orbit
+    std::string getName() const { return name; } // Function to get the name of the planet
+
     //Setters
-    void setOrbiting(Planet* planet); // Function to set the planet as orbiting around another planet : Planet* is a pointer to a Planet object#
     void setRotationSpeed(float speed); // Renamed setRotation to setRotationSpeed to avoid confusion with the setRotation function that sets the rotation angle
     void setOrbitSpeed(float speed);
     void setDistance(float distance);
@@ -43,6 +47,8 @@ public:
     void setTexture(const std::string& texturePath);  // Use const std::string& texturePath to pass the texture path as a constant reference to avoid copying the string
     void setOrigin(sf::Vector2f origin);
     void setRotation(float angle);
+
+    void setOrbitingPlanet(const std::string& orbitingPlanetName, std::vector<Planet>& planets); // Function to set the name of the planet that this planet is orbiting around
 
     private:
         std::string name;

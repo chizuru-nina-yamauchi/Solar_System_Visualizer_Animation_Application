@@ -6,7 +6,7 @@
 #include <iostream> // For std::cerr
 
 int main() {
-    // Create a window with a resolution of 800x600 pixels
+    // Create a window with a resolution of 800x600 pixels -> 1600x1200 pixels(changed to see the whole solar system)
     sf::RenderWindow window(sf::VideoMode(1600, 1200), "Solar System Simulation");
 
     // Retrieve the connection string from an environment variable
@@ -24,6 +24,14 @@ int main() {
 
     // Load planets from the database
     planets = db.loadPlanets();
+
+
+    // Set the orbiting planet for all planets except the sun
+        for (auto& planet : planets) {
+            if (planet.getName() != "Sun") {
+                planet.setOrbitingPlanet("Sun", planets);
+            }
+        }
 
     sf::Clock clock; // Create a clock to measure time
 

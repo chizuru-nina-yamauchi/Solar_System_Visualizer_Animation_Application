@@ -101,9 +101,16 @@ void Planet::draw(sf::RenderWindow& window) {
  * This establishes a relationship between the two planets, where the current planet orbits around the specified planet.
  *
  * */
-void Planet::setOrbiting(Planet* planet) {
-    orbitingPlanet = planet; // Sets the orbitingPlanet member variable to point to the specified planet. This establishes the relationship where the current planet orbits around the specified planet.
+void Planet::setOrbitingPlanet(const std::string& orbitingPlanetName, std::vector<Planet>& planets) {
+    for (auto& planet : planets) {
+        if (planet.getName() == orbitingPlanetName) {
+            this->orbitingPlanet = &planet;
+            return;
+        }
+    }
+    std::cerr << "Planet with name '" << orbitingPlanetName << "' not found." << std::endl;
 }
+
 
 void Planet::setRotationSpeed(float speed) {
     rotationSpeed = speed; // Sets the rotation speed of the planet to the specified speed. This determines how fast the planet rotates around its own axis.
